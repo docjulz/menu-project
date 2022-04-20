@@ -74,7 +74,10 @@ const menu = [
 ];
 
 const sectionCenter = document.querySelector('.section-center');
+const filterBtns = document.querySelectorAll('.filter-btn');
 
+
+// Load Items
 window.addEventListener('DOMContentLoaded', () => {
  displayMenuItems(menu);
 });
@@ -92,7 +95,27 @@ function displayMenuItems(menuItems) {
     <p class="item-text">${item.desc}</p>       
   </div>
 </article>`;
-})
+});
+
 displayMenu = displayMenu.join('');
 sectionCenter.innerHTML = displayMenu;
+
 }
+
+// Filter Items
+filterBtns.forEach((btn) => {
+  btn.addEventListener('click', (e) => {
+    const category = e.currentTarget.dataset.id;
+    const menuCategoy = menu.filter((menuItem) => {
+      if(menuItem.category === category) {
+        return menuItem;
+      }
+     
+    });
+    if(category == "all") {
+      displayMenuItems(menu);
+    } else {
+      displayMenuItems(menuCategoy);
+    }
+  });
+})
