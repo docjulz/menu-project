@@ -74,7 +74,7 @@ const menu = [
   {
     id: 10,
     title: "Filet Mignon",
-    category: "steak",
+    category: "dinner",
     price: 36.99,
     img: "./images/item-10.jpeg",
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
@@ -89,11 +89,12 @@ const container = document.querySelector('.btn-container')
 
 // Load Items
 window.addEventListener('DOMContentLoaded', () => {
-  // Display menu
+  // Display dynamic menu
   displayMenuItems(menu);
+  // Display dynamic buttons
   displayMenuButtons();
-
 });
+
 
 function displayMenuItems(menuItems) {
  // console.log("SHAKE AND BAKE");
@@ -109,10 +110,10 @@ function displayMenuItems(menuItems) {
     </div>
   </article>`;
   })
-
   displayMenu = displayMenu.join('');
   sectionCenter.innerHTML = displayMenu;
 }
+
 
 function displayMenuButtons() {
   //  Display Buttons
@@ -140,8 +141,7 @@ function displayMenuButtons() {
       const menuCategoy = menu.filter((menuItem) => {
         if(menuItem.category === category) {
           return menuItem;
-        }
-      
+        }      
       });
       if(category == "all") {
         displayMenuItems(menu);
