@@ -91,8 +91,31 @@ const container = document.querySelector('.btn-container')
 window.addEventListener('DOMContentLoaded', () => {
   // Display menu
   displayMenuItems(menu);
+  displayMenuButtons();
 
-//  Display Buttons
+});
+
+function displayMenuItems(menuItems) {
+ // console.log("SHAKE AND BAKE");
+ let displayMenu = menuItems.map((item) => {
+  return `<article class="menu-item">
+    <img src=${item.img} class="photo" alt=${item.title}>
+    <div class="item-info">
+      <header>
+        <h2>${item.title}</h>
+        <h2 class="price">$${item.price}</h2>
+      </header>  
+      <p class="item-text">${item.desc}</p>       
+    </div>
+  </article>`;
+  })
+
+  displayMenu = displayMenu.join('');
+  sectionCenter.innerHTML = displayMenu;
+}
+
+function displayMenuButtons() {
+  //  Display Buttons
   const categories = menu.reduce((values, item) => {
     if(!values.includes(item.category)) {
       values.push(item.category);
@@ -106,7 +129,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }).join('');
   // categories = categories.join('');
   container.innerHTML = categoryBtns;
-  
+
   // MOVED from above, see comment above
   const filterBtns = document.querySelectorAll('.filter-btn');
 
@@ -127,25 +150,5 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     });
   })
-});
-
-function displayMenuItems(menuItems) {
- // console.log("SHAKE AND BAKE");
- let displayMenu = menuItems.map((item) => {
-  return `<article class="menu-item">
-  <img src=${item.img} class="photo" alt=${item.title}>
-  <div class="item-info">
-    <header>
-      <h2>${item.title}</h>
-      <h2 class="price">$${item.price}</h2>
-    </header>  
-    <p class="item-text">${item.desc}</p>       
-  </div>
-</article>`;
-})
-
-displayMenu = displayMenu.join('');
-sectionCenter.innerHTML = displayMenu;
-
 }
 
