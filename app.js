@@ -71,36 +71,42 @@ const menu = [
     img: "./images/item-9.jpeg",
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
+  {
+    id: 10,
+    title: "Filet Mignon",
+    category: "steak",
+    price: 36.99,
+    img: "./images/item-10.jpeg",
+    desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
+  },
 ];
 
 const sectionCenter = document.querySelector('.section-center');
-const filterBtns = document.querySelectorAll('.filter-btn');
+const container = document.querySelector('.btn-container')
+// Move this down into the display menu section becuase buttons dynamically added and need to be filtered from there.
+// const filterBtns = document.querySelectorAll('.filter-btn');
 
 
 // Load Items
 window.addEventListener('DOMContentLoaded', () => {
- displayMenuItems(menu);
-});
+  // Display menu
+  displayMenuItems(menu);
 
-function displayMenuItems(menuItems) {
- // console.log("SHAKE AND BAKE");
- let displayMenu = menuItems.map((item) => {
-  return `<article class="menu-item">
-  <img src=${item.img} class="photo" alt=${item.title}>
-  <div class="item-info">
-    <header>
-      <h2>${item.title}</h>
-      <h2 class="price">$${item.price}</h2>
-    </header>  
-    <p class="item-text">${item.desc}</p>       
-  </div>
-</article>`;
-});
-
-displayMenu = displayMenu.join('');
-sectionCenter.innerHTML = displayMenu;
-
-}
+//  Display Buttons
+const categories = menu.reduce((values, item) => {
+  if(!values.includes(item.category)) {
+    values.push(item.category);
+  }
+  return values;
+  }, ['all'])
+  // console.log(categories);
+  const categoryBtns = categories.map((category) => {
+    return `<button class="filter-btn" type="button" data-id=${category}>${category}</button>`
+  }).join('');
+  // categories = categories.join('');
+  container.innerHTML = categoryBtns;
+  // MOVED from above, see comment above
+  const filterBtns = document.querySelectorAll('.filter-btn');
 
 // Filter Items
 filterBtns.forEach((btn) => {
@@ -119,3 +125,25 @@ filterBtns.forEach((btn) => {
     }
   });
 })
+});
+
+function displayMenuItems(menuItems) {
+ // console.log("SHAKE AND BAKE");
+ let displayMenu = menuItems.map((item) => {
+  return `<article class="menu-item">
+  <img src=${item.img} class="photo" alt=${item.title}>
+  <div class="item-info">
+    <header>
+      <h2>${item.title}</h>
+      <h2 class="price">$${item.price}</h2>
+    </header>  
+    <p class="item-text">${item.desc}</p>       
+  </div>
+</article>`;
+})
+
+displayMenu = displayMenu.join('');
+sectionCenter.innerHTML = displayMenu;
+
+}
+
